@@ -22,3 +22,33 @@
     max-width: 210px;
   }
 }
+
+/* Dark header so the official white logo remains visible */
+.site-header {
+  background: #071728;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.desktop-nav a:not(.button) {
+  color: #ffffff;
+}
+
+.desktop-nav a.active {
+  color: #6ce0e5;
+  border-color: #20acb3;
+}
+
+.menu-button span {
+  background: #ffffff;
+}
+
+@media (max-width: 900px) {
+  .mobile-menu {
+    background: #071728;
+  }
+
+  .mobile-menu a {
+    color: #ffffff;
+    border-bottom-color: rgba(255, 255, 255, 0.14);
+  }
+}

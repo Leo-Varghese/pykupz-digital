@@ -1,5 +1,49 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
-export const metadata: Metadata = { title: "Our Work", description: "Selected work from Pykupz Digital." };
-export default function Work(){return <><PageHero eyebrow="Our work" title="Work worth talking about." intro="Case studies will appear here after the company confirms the projects and approves the supporting details."/><section className="section section-tint"><div className="shell"><div className="empty-state"><h2>Portfolio content is being prepared.</h2><p>[CONTENT NEEDED: approved project names, descriptions, visuals and outcomes]</p><Link className="button" href="/contact">Discuss a project</Link></div></div></section></>}
+
+export const metadata: Metadata = {
+  title: "Our Work",
+  description: "Discover the approach and capabilities of Pykupz Digital.",
+};
+
+export default function Work() {
+  return (
+    <>
+      <PageHero
+        eyebrow="Our work"
+        title="Thoughtful digital work starts with clear objectives."
+        intro="We approach every engagement by understanding the organization, its audience and the result it wants to achieve."
+      />
+
+      <section className="section">
+        <div className="shell split">
+          <div>
+            <p className="eyebrow">Our approach</p>
+            <h2 className="statement">
+              Strategy before execution.
+            </h2>
+          </div>
+
+          <div>
+            <p>
+              Pykupz Digital works with organizations to identify priorities,
+              shape the right message and develop a focused digital direction.
+            </p>
+
+            <ul className="check-list">
+              <li>Understand the organization and its goals</li>
+              <li>Identify the intended audience</li>
+              <li>Develop a clear digital direction</li>
+              <li>Review and improve the approach</li>
+            </ul>
+
+            <Link className="button" href="/contact">
+              Start a project
+            </Link>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}

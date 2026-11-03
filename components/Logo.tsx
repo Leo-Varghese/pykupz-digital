@@ -1,10 +1,17 @@
+﻿import Image from "next/image";
 import Link from "next/link";
 
 export function Logo({ inverse = false }: { inverse?: boolean }) {
   return (
     <Link href="/" className="logo" aria-label="Pykupz Digital home">
-      <span className="logo-mark" aria-hidden="true"><i /><b /></span>
-      <span className={inverse ? "text-white" : "text-ink"}>PYKUPZ <strong>DIGITAL</strong></span>
+      <Image
+        src="/images/brand/02.jpg"
+        alt="Pykupz Digital"
+        width={220}
+        height={48}
+        priority
+        className={inverse ? "brand-logo brand-logo-footer" : "brand-logo"}
+      />
     </Link>
   );
 }

@@ -1,6 +1,40 @@
-import type { Metadata } from "next";
-import Link from "next/link";
+﻿import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { site } from "@/data/site";
-export const metadata: Metadata = { title: "Careers", description: "Career interest at Pykupz Digital." };
-export default function Careers(){return <><PageHero eyebrow="Careers" title="Build what comes next." intro="There are no confirmed vacancies to publish at this time."/><section className="section"><div className="shell content-block"><h2>Interested in Pykupz Digital?</h2><p>Send a brief introduction and relevant portfolio or profile for future consideration. This is a general expression of interest, not an active job listing.</p><a className="button" href={`mailto:${site.email}?subject=Career%20interest%20%E2%80%94%20Pykupz%20Digital`}>Email your interest</a><p><Link href="/about">Learn more about Pykupz →</Link></p></div></section></>}
+
+export const metadata: Metadata = {
+  title: "Careers",
+  description: "Connect with Pykupz Digital about career opportunities.",
+};
+
+export default function Careers() {
+  return (
+    <>
+      <PageHero
+        eyebrow="Careers"
+        title="Create, learn and grow with us."
+        intro="Pykupz Digital welcomes people interested in digital marketing, creative work and building meaningful online experiences."
+      />
+
+      <section className="section">
+        <div className="shell content-block">
+          <p className="eyebrow">Work with Pykupz</p>
+          <h2>Introduce yourself.</h2>
+
+          <p>
+            If you are interested in future opportunities with Pykupz Digital,
+            send us a short introduction together with your portfolio, résumé
+            or professional profile.
+          </p>
+
+          <a
+            className="button"
+            href={`mailto:${site.email}?subject=Career%20interest%20%E2%80%94%20Pykupz%20Digital`}
+          >
+            Send your profile
+          </a>
+        </div>
+      </section>
+    </>
+  );
+}

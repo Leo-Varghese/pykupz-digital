@@ -24,60 +24,62 @@ export function Header() {
   }
 
   useEffect(() => {
-    closeMenu();
+    setOpen(false);
   }, [pathname]);
 
   useEffect(() => {
     document.body.classList.toggle("menu-open", open);
 
-    function handleEscape(event: KeyboardEvent) {
+    function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         closeMenu();
       }
     }
 
-    window.addEventListener("keydown", handleEscape);
+    window.addEventListener("keydown", handleKeyDown);
 
     return () => {
       document.body.classList.remove("menu-open");
-      window.removeEventListener("keydown", handleEscape);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, [open]);
 
   return (
-    <header className="site-header">
-      <div className="shell nav-wrap">
-        <Logo />
+    <>
+      <header className="site-header">
+        <div className="shell nav-wrap">
+          <Logo />
 
-        <nav className="desktop-nav" aria-label="Primary navigation">
-          {links.map(([label, href]) => (
-            <Link
-              key={href}
-              className={pathname === href ? "active" : ""}
-              href={href}
-            >
-              {label}
+          <nav className="desktop-nav" aria-label="Primary navigation">
+            {links.map(([label, href]) => (
+              <Link
+                key={href}
+                className={pathname === href ? "active" : ""}
+                href={href}
+              >
+                {label}
+              </Link>
+            ))}
+
+            <Link className="button button-small" href="/contact">
+              Start a conversation
             </Link>
-          ))}
+          </nav>
 
-          <Link className="button button-small" href="/contact">
-            Start a conversation
-          </Link>
-        </nav>
-
-        <button
-          type="button"
-          className={`menu-button ${open ? "menu-button-open" : ""}`}
-          aria-expanded={open}
-          aria-controls="mobile-curtain-menu"
-          aria-label={open ? "Close navigation menu" : "Open navigation menu"}
-          onClick={() => setOpen((current) => !current)}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
-      </div>
+          <button
+            type="button"
+            className={`menu-button ${open ? "menu-button-open" : ""}`}
+            aria-expanded={open}
+            aria-controls="mobile-curtain-menu"
+            aria-label={open ? "Close navigation menu" : "Open navigation menu"}
+            onClick={() => setOpen((current) => !current)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
+      </header>
 
       <div
         id="mobile-curtain-menu"
@@ -114,6 +116,6 @@ export function Header() {
           </a>
         </div>
       </div>
-    </header>
+    </>
   );
 }

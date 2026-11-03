@@ -11,3 +11,4 @@ export function SocialLinks() {
   return <div className="socials" aria-label="Pykupz Digital social profiles">{Object.entries(site.social).map(([name, href]) => <a key={name} href={href} target="_blank" rel="noopener noreferrer" aria-label={`Pykupz Digital on ${name}`}><svg viewBox="0 0 24 24" aria-hidden="true">{icons[name as keyof typeof icons]}</svg></a>)}</div>;
 }
 
+

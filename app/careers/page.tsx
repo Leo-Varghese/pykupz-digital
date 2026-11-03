@@ -23,7 +23,7 @@ export default function Careers() {
 
           <p>
             If you are interested in future opportunities with Pykupz Digital,
-            send us a short introduction together with your portfolio, résumé
+            send us a short introduction together with your portfolio, resume
             or professional profile.
           </p>
 
@@ -38,4 +38,5 @@ export default function Careers() {
     </>
   );
 }
+
 

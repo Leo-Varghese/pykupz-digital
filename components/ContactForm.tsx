@@ -1,20 +1,134 @@
-"use client";
+﻿"use client";
+
 import { FormEvent, useState } from "react";
-import { site } from "@/data/site";
+
+type FormStatus = "idle" | "sending" | "success" | "error";
 
 export function ContactForm() {
-  const [status, setStatus] = useState("");
-  function submit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    const required = ["name", "email", "subject", "message"];
-    if (required.some(k => !String(data.get(k) || "").trim())) { setStatus("Please complete all required fields."); return; }
-    const email = String(data.get("email"));
-    if (!/^\S+@\S+\.\S+$/.test(email)) { setStatus("Please enter a valid email address."); return; }
-    const subject = encodeURIComponent(String(data.get("subject")));
-    const body = encodeURIComponent(`Name: ${data.get("name")}\nEmail: ${email}\nOrganization: ${data.get("company") || "Not provided"}\n\n${data.get("message")}`);
-    setStatus("Your email app should open with the message prepared. Review it, then send.");
-    window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`;
+  const [status, setStatus] = useState<FormStatus>("idle");
+  const [message, setMessage] = useState("");
+
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const data = new FormData(form);
+
+    setStatus("sending");
+    setMessage("");
+
+    try {
+      const response = await fetch(
+        "https://formspree.io/f/xnpplarr",
+        {
+          method: "POST",
+          body: data,
+          headers: {
+            Accept: "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Form submission failed");
+      }
+
+      form.reset();
+      setStatus("success");
+      setMessage(
+        "Thank you. Your message has been sent to Pykupz Digital."
+      );
+    } catch {
+      setStatus("error");
+      setMessage(
+        "The message could not be sent. Please try again or email Pykupz Digital directly."
+      );
+    }
   }
-  return <form className="contact-form" onSubmit={submit} noValidate><div className="field-grid"><label>Name *<input name="name" autoComplete="name" /></label><label>Email *<input name="email" type="email" autoComplete="email" /></label></div><label>Company / Organization<input name="company" autoComplete="organization" /></label><label>Subject *<input name="subject" /></label><label>Message *<textarea name="message" rows={6} /></label><button className="button" type="submit">Prepare email</button><p className="form-note">This form uses your email app. It does not send data to a third-party form service.</p><p className="status" aria-live="polite">{status}</p></form>;
+
+  return (
+    <form className="contact-form" onSubmit={submit}>
+      <input
+        type="hidden"
+        name="_subject"
+        value="New enquiry from the Pykupz Digital website"
+      />
+
+      <div className="field-grid">
+        <label htmlFor="contact-name">
+          Name *
+          <input
+            id="contact-name"
+            name="name"
+            type="text"
+            autoComplete="name"
+            required
+          />
+        </label>
+
+        <label htmlFor="contact-email">
+          Email *
+          <input
+            id="contact-email"
+            name="email"
+            type="email"
+            autoComplete="email"
+            required
+          />
+        </label>
+      </div>
+
+      <label htmlFor="contact-company">
+        Company / Organization
+        <input
+          id="contact-company"
+          name="company"
+          type="text"
+          autoComplete="organization"
+        />
+      </label>
+
+      <label htmlFor="contact-subject">
+        Subject *
+        <input
+          id="contact-subject"
+          name="subject"
+          type="text"
+          required
+        />
+      </label>
+
+      <label htmlFor="contact-message">
+        Message *
+        <textarea
+          id="contact-message"
+          name="message"
+          rows={7}
+          required
+        />
+      </label>
+
+      <button
+        className="button contact-submit"
+        type="submit"
+        disabled={status === "sending"}
+      >
+        {status === "sending" ? "Sending..." : "Send message"}
+      </button>
+
+      <p
+        className={`form-status ${
+          status === "error" ? "form-status-error" : ""
+        }`}
+        role="status"
+        aria-live="polite"
+      >
+        {message}
+      </p>
+
+      <p className="form-note">
+        Your enquiry will be delivered directly to Pykupz Digital.
+      </p>
+    </form>
+  );
 }

@@ -1,4 +1,4 @@
-export type Service = { title: string; description: string; status?: "confirmed" | "review" };
+﻿export type Service = { title: string; description: string; status?: "confirmed" | "review" };
 
 export const services: Service[] = [
   {
@@ -7,3 +7,4 @@ export const services: Service[] = [
     status: "confirmed"
   }
 ];
+

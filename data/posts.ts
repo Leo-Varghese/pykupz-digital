@@ -1,2 +1,3 @@
-export type Post = { title: string; slug: string; date: string; excerpt: string };
+﻿export type Post = { title: string; slug: string; date: string; excerpt: string };
 export const posts: Post[] = [];
+

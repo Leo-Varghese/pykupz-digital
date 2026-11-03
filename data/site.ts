@@ -1,4 +1,4 @@
-export const site = {
+﻿export const site = {
   name: "Pykupz Digital",
   domain: "https://pykupz.in",
   email: "business.support@pykupz.in",
@@ -10,3 +10,4 @@ export const site = {
     facebook: "https://www.facebook.com/PykupzDigital"
   }
 } as const;
+
